@@ -8,7 +8,7 @@ import { Request, Response } from 'express'
 describe('CreateBooksController', () => {
   function makeSut() {
     const controller = new CreateBooksController(logger, booksRepositoryMock)
-    
+
     const newBookMock: NewBook = {
       title: fakerEN.word.words(),
       subtitle: fakerEN.word.words(),

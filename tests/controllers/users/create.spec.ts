@@ -8,7 +8,7 @@ import { Request, Response } from 'express'
 describe('CreateUsersController', () => {
   function makeSut() {
     const controller = new CreateUsersController(logger, usersRepositoryMock)
-    
+
     const newUserMock: NewUser = {
       name: fakerEN.internet.userName(),
       email: fakerEN.internet.email(),

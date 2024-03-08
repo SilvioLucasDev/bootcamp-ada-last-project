@@ -5,10 +5,10 @@ import { Book, NewBook } from '../../../src/controllers/models'
 import { fakerEN } from '@faker-js/faker'
 import { Request, Response } from 'express'
 
-describe('UpdateUsersController', ()=> {
+describe('UpdateUsersController', () => {
   function makeSut() {
     const controller = new UpdateUsersController(logger, usersRepositoryMock)
-    
+
     const newBookMock: NewBook = {
       title: fakerEN.word.words(),
       subtitle: fakerEN.word.words(),
@@ -22,7 +22,7 @@ describe('UpdateUsersController', ()=> {
       ...newBookMock
     }
 
-    const requestMock = { 
+    const requestMock = {
       body: newBookMock,
       params: { id: bookMock.id } as any
     } as Request

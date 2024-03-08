@@ -5,10 +5,10 @@ import { NewUser, User } from '../../../src/controllers/models'
 import { fakerEN } from '@faker-js/faker'
 import { Request, Response } from 'express'
 
-describe('ReadUsersController', ()=> {
+describe('ReadUsersController', () => {
   function makeSut() {
     const controller = new ReadUsersController(logger, usersRepositoryMock)
-    
+
     const newUserMock: NewUser = {
       name: fakerEN.internet.userName(),
       email: fakerEN.internet.email(),
@@ -19,7 +19,7 @@ describe('ReadUsersController', ()=> {
       ...newUserMock
     }
 
-    const requestMock = { 
+    const requestMock = {
       body: newUserMock,
       params: { id: userMock.id } as any
     } as Request

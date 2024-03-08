@@ -5,10 +5,10 @@ import { Book, NewBook } from '../../../src/controllers/models'
 import { fakerEN } from '@faker-js/faker'
 import { Request, Response } from 'express'
 
-describe('DeleteBooksController', ()=> {
+describe('DeleteBooksController', () => {
   function makeSut() {
     const controller = new DeleteBooksController(logger, booksRepositoryMock)
-    
+
     const newBookMock: NewBook = {
       title: fakerEN.word.words(),
       subtitle: fakerEN.word.words(),
@@ -22,7 +22,7 @@ describe('DeleteBooksController', ()=> {
       ...newBookMock
     }
 
-    const requestMock = { 
+    const requestMock = {
       body: newBookMock,
       params: { id: bookMock.id } as any
     } as Request
@@ -60,7 +60,7 @@ describe('DeleteBooksController', ()=> {
     expect(responseMock.statusCode).toEqual(200)
   })
 
-   it('should not delete the book if there is no book with the id provided', async () => {
+  it('should not delete the book if there is no book with the id provided', async () => {
     const { controller, newBookMock, bookMock, requestMock, responseMock } = makeSut()
     jest.spyOn(booksRepositoryMock, 'getById').mockResolvedValueOnce(undefined)
     jest.spyOn(booksRepositoryMock, 'delete')

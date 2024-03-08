@@ -5,11 +5,11 @@ import { BooksRental, NewBooksRental } from '../../../src/controllers/models'
 import { fakerEN } from '@faker-js/faker'
 import { Request, Response } from 'express'
 
-describe('UpdateBooksRentalController', ()=> {
+describe('UpdateBooksRentalController', () => {
 
   function makeSut() {
     const controller = new UpdateBooksRentalController(logger, booksRentalRepositoryMock)
-    
+
     const newBooksRentalMock: NewBooksRental = {
       book_id: fakerEN.string.uuid(),
       user_id: fakerEN.string.uuid(),
@@ -22,7 +22,7 @@ describe('UpdateBooksRentalController', ()=> {
       ...newBooksRentalMock
     }
 
-    const requestMock = { 
+    const requestMock = {
       body: newBooksRentalMock,
       params: { id: booksRentalMock.id } as any,
     } as Request

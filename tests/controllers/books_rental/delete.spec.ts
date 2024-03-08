@@ -5,10 +5,10 @@ import { NewBooksRental, BooksRental } from '../../../src/controllers/models'
 import { fakerEN } from '@faker-js/faker'
 import { Request, Response } from 'express'
 
-describe('DeleteBooksRentalController', ()=> {
+describe('DeleteBooksRentalController', () => {
   function makeSut() {
     const controller = new DeleteBooksRentalController(logger, booksRentalRepositoryMock)
-    
+
     const newBooksRentalMock: NewBooksRental = {
       book_id: fakerEN.string.uuid(),
       user_id: fakerEN.string.uuid(),
@@ -21,7 +21,7 @@ describe('DeleteBooksRentalController', ()=> {
       ...newBooksRentalMock
     }
 
-    const requestMock = { 
+    const requestMock = {
       body: newBooksRentalMock,
       params: { id: booksRentalMock.id } as any,
     } as Request
@@ -47,7 +47,7 @@ describe('DeleteBooksRentalController', ()=> {
   })
 
   it('should delete the book rental if the book exist', async () => {
-     const { controller, newBooksRentalMock, booksRentalMock, requestMock, responseMock } = makeSut()
+    const { controller, newBooksRentalMock, booksRentalMock, requestMock, responseMock } = makeSut()
     jest.spyOn(booksRentalRepositoryMock, 'getById').mockResolvedValueOnce(booksRentalMock)
     jest.spyOn(booksRentalRepositoryMock, 'delete').mockResolvedValueOnce()
 
@@ -59,8 +59,8 @@ describe('DeleteBooksRentalController', ()=> {
     expect(responseMock.statusCode).toEqual(200)
   })
 
-   it('should not delete the book rental if there is no rental with the same id', async () => {
-     const { controller, newBooksRentalMock, booksRentalMock, requestMock, responseMock } = makeSut()
+  it('should not delete the book rental if there is no rental with the same id', async () => {
+    const { controller, newBooksRentalMock, booksRentalMock, requestMock, responseMock } = makeSut()
     jest.spyOn(booksRentalRepositoryMock, 'getById').mockResolvedValueOnce(undefined)
     jest.spyOn(booksRentalRepositoryMock, 'delete')
 
@@ -73,7 +73,7 @@ describe('DeleteBooksRentalController', ()=> {
   })
 
   it('should return 500 if some error occur', async () => {
-     const { controller, newBooksRentalMock, booksRentalMock, requestMock, responseMock } = makeSut()
+    const { controller, newBooksRentalMock, booksRentalMock, requestMock, responseMock } = makeSut()
     jest.spyOn(booksRentalRepositoryMock, 'getById').mockRejectedValueOnce(new Error('some error'))
     jest.spyOn(booksRentalRepositoryMock, 'delete')
 

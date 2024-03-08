@@ -8,7 +8,7 @@ import { Request, Response } from 'express'
 describe('CreateBooksRentalController', () => {
   function makeSut() {
     const controller = new CreateBooksRentalController(logger, booksRentalRepositoryMock)
-    
+
     const newBooksRentalMock: NewBooksRental = {
       book_id: fakerEN.string.uuid(),
       user_id: fakerEN.string.uuid(),

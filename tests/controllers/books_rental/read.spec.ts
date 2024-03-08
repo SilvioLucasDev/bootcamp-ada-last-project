@@ -5,10 +5,10 @@ import { BooksRental, NewBooksRental } from '../../../src/controllers/models'
 import { fakerEN } from '@faker-js/faker'
 import { Request, Response } from 'express'
 
-describe('ReadBooksRentalController', ()=> {
+describe('ReadBooksRentalController', () => {
   function makeSut() {
     const controller = new ReadBooksRentalController(logger, booksRentalRepositoryMock)
-    
+
     const newBooksRentalMock: NewBooksRental = {
       book_id: fakerEN.string.uuid(),
       user_id: fakerEN.string.uuid(),
@@ -21,7 +21,7 @@ describe('ReadBooksRentalController', ()=> {
       ...newBooksRentalMock
     }
 
-    const requestMock = { 
+    const requestMock = {
       body: newBooksRentalMock,
       params: { id: booksRentalMock.id } as any,
     } as Request
@@ -66,7 +66,7 @@ describe('ReadBooksRentalController', ()=> {
 
       await expect(promise).resolves.not.toThrow()
       expect(booksRentalRepositoryMock.getById).toHaveBeenCalledWith(booksRentalMock.id)
-       expect(booksRentalRepositoryMock.getById).toHaveBeenCalledTimes(2)
+      expect(booksRentalRepositoryMock.getById).toHaveBeenCalledTimes(2)
       expect(responseMock.statusCode).toEqual(204)
     })
 
