@@ -29,14 +29,13 @@ describe('ReadBooksController', () => {
 
     const responseMock = {
       statusCode: 0,
-      status: (status: number) => {
-        responseMock.statusCode = status
-        return {
-          json: jest.fn(),
-          send: jest.fn(),
-        } as any
-      },
-    } as Response
+      status: jest.fn().mockImplementation((status: number) => {
+        responseMock.statusCode = status;
+        return responseMock;
+      }),
+      json: jest.fn(),
+      send: jest.fn(),
+    } as unknown as Response;
 
     return {
       controller, newBookMock, bookMock, requestMock, responseMock
@@ -84,7 +83,17 @@ describe('ReadBooksController', () => {
   })
 
   describe('list', () => {
-    it.todo('should return the list of books')
+    it('should return the list of books', async () => {
+      const { controller, newBookMock, bookMock, requestMock, responseMock } = makeSut()
+      jest.spyOn(booksRepositoryMock, 'list').mockResolvedValueOnce([bookMock, bookMock])
+
+      const promise = controller.list(requestMock, responseMock)
+
+      await expect(promise).resolves.not.toThrow()
+      expect(booksRepositoryMock.list).toHaveBeenCalledTimes(1)
+      expect(responseMock.json).toHaveBeenCalledWith([bookMock, bookMock])
+      expect(responseMock.statusCode).toEqual(200)
+    })
 
     it.todo('should return 500 if some error occur')
   })
