@@ -39,4 +39,8 @@ export class UsersRepository implements IUsersRepository {
   public async update(id: string, user: NewUser): Promise<void> {
     await UsersModel.update({ ...user }, { where: { id } })
   }
+
+  public async delete(id: string): Promise<void> {
+    await UsersModel.destroy({ where: { id } })
+  }
 }
