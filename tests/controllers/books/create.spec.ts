@@ -66,11 +66,12 @@ describe('CreateBooksController', () => {
     await expect(promise).resolves.not.toThrow()
     expect(booksRepositoryMock.getByTitle).toHaveBeenCalledWith(newBookMock.title)
     expect(booksRepositoryMock.create).not.toHaveBeenCalled()
+    expect(responseMock.json).toHaveBeenCalledWith({ message: 'book with the same title already exists!' })
     expect(responseMock.statusCode).toEqual(409)
   })
 
   it('should return 500 if some error occur', async () => {
-    const { controller, newBookMock, bookMock, requestMock, responseMock } = makeSut()
+    const { controller, newBookMock, requestMock, responseMock } = makeSut()
     jest.spyOn(booksRepositoryMock, 'getByTitle').mockRejectedValueOnce(new Error('some error'))
 
     const promise = controller.create(requestMock, responseMock)

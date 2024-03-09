@@ -63,6 +63,7 @@ describe('CreateUsersController', () => {
     await expect(promise).resolves.not.toThrow()
     expect(usersRepositoryMock.getByEmail).toHaveBeenCalledWith(newUserMock.email)
     expect(usersRepositoryMock.create).not.toHaveBeenCalled()
+    expect(responseMock.json).toHaveBeenCalledWith({ message: 'user with the same email already exists!' })
     expect(responseMock.statusCode).toEqual(409)
   })
 

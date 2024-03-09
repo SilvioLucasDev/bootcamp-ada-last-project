@@ -68,6 +68,7 @@ describe('DeleteBooksRentalController', () => {
     await expect(promise).resolves.not.toThrow()
     expect(booksRentalRepositoryMock.getById).toHaveBeenCalledWith(booksRentalMock.id)
     expect(booksRentalRepositoryMock.delete).not.toHaveBeenCalled()
+    expect(responseMock.json).toHaveBeenCalledWith({ message: 'any book rental with the id provided was founded!' })
     expect(responseMock.statusCode).toEqual(409)
   })
 

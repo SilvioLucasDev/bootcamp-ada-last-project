@@ -16,7 +16,7 @@ export class CreateUsersController {
       const alreadyCreated = await this.usersRepository.getByEmail(body.email)
       if(alreadyCreated){
         this.logger.warn({ message: 'duplicated user', email: body.email })
-        res.status(409).json({ message: 'user with the same email already existe' })
+        res.status(409).json({ message: 'user with the same email already exists!' })
         return
       }
 

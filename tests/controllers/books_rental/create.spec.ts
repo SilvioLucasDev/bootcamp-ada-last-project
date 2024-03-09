@@ -65,6 +65,7 @@ describe('CreateBooksRentalController', () => {
     await expect(promise).resolves.not.toThrow()
     expect(booksRentalRepositoryMock.getByBookId).toHaveBeenCalledWith(newBooksRentalMock.book_id)
     expect(booksRentalRepositoryMock.create).not.toHaveBeenCalled()
+    expect(responseMock.json).toHaveBeenCalledWith({ message: 'book already rented!' })
     expect(responseMock.statusCode).toEqual(409)
   })
 
