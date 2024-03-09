@@ -1,9 +1,8 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../sequelize";
-import { BooksRentalModel } from "./BooksRental";
 import { Book } from "../../controllers/models";
 
-class BooksModel extends Model<Book> {}
+class BooksModel extends Model<Book> { }
 
 BooksModel.init(
   {

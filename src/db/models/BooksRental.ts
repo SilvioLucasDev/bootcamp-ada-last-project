@@ -1,6 +1,6 @@
 import { Association, DataTypes, HasManyGetAssociationsMixin, Model, Optional } from "sequelize";
 import { sequelize } from "../sequelize";
-import { BooksRental, User } from "../../controllers/models";
+import { BooksRental } from "../../controllers/models";
 import { UsersModel } from "./Users";
 import { BooksModel } from "./Books";
 
@@ -11,7 +11,7 @@ class BooksRentalModel extends Model<BooksRental, Optional<BooksRental, 'book' |
   public getUser!: HasManyGetAssociationsMixin<UsersModel>
   public booksRentalModelUsers!: UsersModel
 
-   public static associations: {
+  public static associations: {
     booksRentalModelBooks: Association<BooksModel>,
     booksRentalModelUsers: Association<UsersModel>
   }
@@ -39,7 +39,7 @@ BooksRentalModel.init(
       type: DataTypes.DATE,
       allowNull: false
     },
-  }, 
+  },
   {
     tableName: "books_rental",
     sequelize: sequelize,
