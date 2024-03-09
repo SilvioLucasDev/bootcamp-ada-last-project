@@ -1,7 +1,7 @@
-import { UpdateUsersController } from '../../../src/controllers/users/update'
+import { UpdateUsersController } from '../../../../src/controllers/users/update'
 import { logger } from '../../mocks/logger'
 import { usersRepositoryMock } from '../../mocks/users_repository'
-import { User, NewUser } from '../../../src/controllers/models'
+import { User, NewUser } from '../../../../src/controllers/models'
 import { fakerEN } from '@faker-js/faker'
 import { Request, Response } from 'express'
 

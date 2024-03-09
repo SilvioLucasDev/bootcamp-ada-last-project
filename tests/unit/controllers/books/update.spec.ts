@@ -1,7 +1,7 @@
-import { UpdateBooksController } from '../../../src/controllers/books/update'
+import { UpdateBooksController } from '../../../../src/controllers/books/update'
 import { logger } from '../../mocks/logger'
 import { booksRepositoryMock } from '../../mocks/books_repository'
-import { Book, NewBook } from '../../../src/controllers/models'
+import { Book, NewBook } from '../../../../src/controllers/models'
 import { fakerEN } from '@faker-js/faker'
 import { Request, Response } from 'express'
 

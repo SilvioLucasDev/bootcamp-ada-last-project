@@ -1,7 +1,7 @@
-import { ReadUsersController } from '../../../src/controllers/users/read'
+import { ReadUsersController } from '../../../../src/controllers/users/read'
 import { logger } from '../../mocks/logger'
 import { usersRepositoryMock } from '../../mocks/users_repository'
-import { NewUser, User } from '../../../src/controllers/models'
+import { NewUser, User } from '../../../../src/controllers/models'
 import { fakerEN } from '@faker-js/faker'
 import { Request, Response } from 'express'
 

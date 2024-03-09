@@ -1,5 +1,5 @@
-import { IUsersRepository } from "../../src/controllers/interfaces";
-import { NewUser, User } from "../../src/controllers/models";
+import { IUsersRepository } from "../../../src/controllers/interfaces";
+import { NewUser, User } from "../../../src/controllers/models";
 
 export const usersRepositoryMock: IUsersRepository = {
   create: (newUser: NewUser): Promise<User> => jest.fn as any,

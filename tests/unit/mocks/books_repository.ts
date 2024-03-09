@@ -1,5 +1,5 @@
-import { IBooksRepository } from "../../src/controllers/interfaces";
-import { Book, NewBook } from "../../src/controllers/models";
+import { IBooksRepository } from "../../../src/controllers/interfaces";
+import { Book, NewBook } from "../../../src/controllers/models";
 
 export const booksRepositoryMock: IBooksRepository = {
   create: (newBook: NewBook): Promise<Book> => jest.fn as any,
