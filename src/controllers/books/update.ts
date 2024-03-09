@@ -20,7 +20,7 @@ export class UpdateBooksController {
         return
       }
 
-      if (body.title && body.title === book.title) {
+      if (body.title) {
         const withTheSameTitle = await this.booksRepository.getByTitle(body.title)
         if (withTheSameTitle) {
           res.status(409).json({ message: 'there is already a book with the same title provided' })
