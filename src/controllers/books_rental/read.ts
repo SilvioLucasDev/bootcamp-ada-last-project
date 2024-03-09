@@ -6,7 +6,7 @@ export class ReadBooksRentalController {
   constructor(
     private readonly logger: Logger,
     private readonly booksRentalRepository: IBooksRentalRepository
-  ) {}
+  ) { }
 
   public async getById(req: Request, res: Response): Promise<void> {
     const { id } = req.params
@@ -14,14 +14,14 @@ export class ReadBooksRentalController {
     try {
       const rented = await this.booksRentalRepository.getById(id)
 
-      if(rented)
+      if (rented)
         res.status(200).json(rented)
-      else 
+      else
         res.status(204).send()
 
       return
-    }catch(err){ 
-      this.logger.error({ message: 'error to read book rental' , error: err })
+    } catch (err) {
+      this.logger.error({ message: 'error to read book rental', error: err })
       res.status(500).json({ message: 'something went wrong, try again latter!' })
       return
     }
@@ -29,11 +29,11 @@ export class ReadBooksRentalController {
 
   public async list(req: Request, res: Response): Promise<void> {
     try {
-      const rentalList = await this.booksRentalRepository.list()
-      res.status(200).json(rentalList)
+      const booksRental = await this.booksRentalRepository.list()
+      res.status(200).json(booksRental)
       return
-    }catch(err){ 
-      this.logger.error({ message: 'error to read book rental', error: err })
+    } catch (err) {
+      this.logger.error({ message: 'error to read books rental', error: err })
       res.status(500).json({ message: 'something went wrong, try again latter!' })
       return
     }

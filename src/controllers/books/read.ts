@@ -6,7 +6,7 @@ export class ReadBooksController {
   constructor(
     private readonly logger: Logger,
     private readonly booksRepository: IBooksRepository
-  ) {}
+  ) { }
 
   public async getById(req: Request, res: Response): Promise<void> {
     const { id } = req.params
@@ -14,13 +14,13 @@ export class ReadBooksController {
     try {
       const book = await this.booksRepository.getById(id)
 
-      if(book)
+      if (book)
         res.status(200).json(book)
       else
         res.status(204).send()
 
       return
-    }catch(err){ 
+    } catch (err) {
       this.logger.error({ message: 'error to read book', error: err })
       res.status(500).json({ message: 'something went wrong, try again latter!' })
       return
@@ -29,11 +29,11 @@ export class ReadBooksController {
 
   public async list(req: Request, res: Response): Promise<void> {
     try {
-      const book = await this.booksRepository.list()
-      res.status(200).json(book)
+      const books = await this.booksRepository.list()
+      res.status(200).json(books)
       return
-    }catch(err){ 
-      this.logger.error({ message: 'error to read book', error: err })
+    } catch (err) {
+      this.logger.error({ message: 'error to read books', error: err })
       res.status(500).json({ message: 'something went wrong, try again latter!' })
       return
     }
