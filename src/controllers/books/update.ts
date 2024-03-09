@@ -16,7 +16,7 @@ export class UpdateBooksController {
     try {
       const book = await this.booksRepository.getById(id)
       if (!book) {
-        res.status(404).json({ message: 'any book with the id provided was founded' })
+        res.status(404).json({ message: 'no book were found with the given id' })
         return
       }
 
