@@ -47,7 +47,7 @@ describe('ReadBooksRentalController', () => {
 
   describe('getById', () => {
     it('should return book rental if the rental was funded', async () => {
-      const { controller, newBooksRentalMock, booksRentalMock, requestMock, responseMock } = makeSut()
+      const { controller, booksRentalMock, requestMock, responseMock } = makeSut()
       jest.spyOn(booksRentalRepositoryMock, 'getById').mockResolvedValueOnce(booksRentalMock)
 
       const promise = controller.getById(requestMock, responseMock)
@@ -58,7 +58,7 @@ describe('ReadBooksRentalController', () => {
     })
 
     it('should return 204 with empty body if there is not book rental', async () => {
-      const { controller, newBooksRentalMock, booksRentalMock, requestMock, responseMock } = makeSut()
+      const { controller, booksRentalMock, requestMock, responseMock } = makeSut()
       jest.spyOn(booksRentalRepositoryMock, 'getById').mockResolvedValueOnce(undefined)
 
       const promise = controller.getById(requestMock, responseMock)
@@ -70,7 +70,7 @@ describe('ReadBooksRentalController', () => {
     })
 
     it('should return 500 if some error occur', async () => {
-      const { controller, newBooksRentalMock, booksRentalMock, requestMock, responseMock } = makeSut()
+      const { controller, booksRentalMock, requestMock, responseMock } = makeSut()
       jest.spyOn(booksRentalRepositoryMock, 'getById').mockRejectedValueOnce(new Error('some error'))
 
       const promise = controller.getById(requestMock, responseMock)
@@ -85,7 +85,7 @@ describe('ReadBooksRentalController', () => {
 
   describe('list', () => {
     it('should return the list of books rental', async () => {
-      const { controller, newBooksRentalMock, booksRentalMock, requestMock, responseMock } = makeSut()
+      const { controller, booksRentalMock, requestMock, responseMock } = makeSut()
       jest.spyOn(booksRentalRepositoryMock, 'list').mockResolvedValueOnce([booksRentalMock, booksRentalMock])
 
       const promise = controller.list(requestMock, responseMock)
@@ -97,7 +97,7 @@ describe('ReadBooksRentalController', () => {
     })
 
     it('should return 500 if some error occur', async () => {
-      const { controller, newBooksRentalMock, booksRentalMock, requestMock, responseMock } = makeSut()
+      const { controller, requestMock, responseMock } = makeSut()
       jest.spyOn(booksRentalRepositoryMock, 'list').mockRejectedValueOnce(new Error('some error'))
 
       const promise = controller.list(requestMock, responseMock)

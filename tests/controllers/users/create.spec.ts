@@ -67,7 +67,7 @@ describe('CreateUsersController', () => {
   })
 
   it('should return 500 if some error occur', async () => {
-    const { controller, newUserMock, userMock, requestMock, responseMock } = makeSut()
+    const { controller, newUserMock, requestMock, responseMock } = makeSut()
     jest.spyOn(usersRepositoryMock, 'getByEmail').mockRejectedValueOnce(new Error('some error'))
 
     const promise = controller.create(requestMock, responseMock)

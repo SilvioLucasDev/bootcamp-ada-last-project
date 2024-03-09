@@ -75,7 +75,7 @@ describe('UpdateBooksController', () => {
   })
 
   it('should return 500 if some error occur', async () => {
-    const { controller, newBookMock, bookMock, requestMock, responseMock } = makeSut()
+    const { controller, bookMock, requestMock, responseMock } = makeSut()
     jest.spyOn(booksRepositoryMock, 'getById').mockRejectedValueOnce(new Error('some error'))
 
     const promise = controller.update(requestMock, responseMock)

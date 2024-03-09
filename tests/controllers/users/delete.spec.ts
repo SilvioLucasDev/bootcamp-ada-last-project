@@ -44,7 +44,7 @@ describe('DeleteBooksController', () => {
   })
 
   it('should delete the user if the user exist', async () => {
-    const { controller, newUserMock, userMock, requestMock, responseMock } = makeSut()
+    const { controller, userMock, requestMock, responseMock } = makeSut()
     jest.spyOn(usersRepositoryMock, 'getById').mockResolvedValueOnce(userMock)
     jest.spyOn(usersRepositoryMock, 'delete').mockResolvedValueOnce()
 
@@ -58,7 +58,7 @@ describe('DeleteBooksController', () => {
   })
 
   it('should not delete the user if there is no user with the id provided', async () => {
-    const { controller, newUserMock, userMock, requestMock, responseMock } = makeSut()
+    const { controller, userMock, requestMock, responseMock } = makeSut()
     jest.spyOn(usersRepositoryMock, 'getById').mockResolvedValueOnce(undefined)
     jest.spyOn(usersRepositoryMock, 'delete')
 
@@ -71,7 +71,7 @@ describe('DeleteBooksController', () => {
   })
 
   it('should return 500 if some error occur', async () => {
-    const { controller, newUserMock, userMock, requestMock, responseMock } = makeSut()
+    const { controller, userMock, requestMock, responseMock } = makeSut()
     jest.spyOn(usersRepositoryMock, 'getById').mockRejectedValueOnce(new Error('some error'))
     jest.spyOn(usersRepositoryMock, 'delete')
 

@@ -45,7 +45,7 @@ describe('ReadUsersController', () => {
 
   describe('getById', () => {
     it('should return user if the user exist', async () => {
-      const { controller, newUserMock, userMock, requestMock, responseMock } = makeSut()
+      const { controller, userMock, requestMock, responseMock } = makeSut()
       jest.spyOn(usersRepositoryMock, 'getById').mockResolvedValueOnce(userMock)
 
       const promise = controller.getById(requestMock, responseMock)
@@ -56,7 +56,7 @@ describe('ReadUsersController', () => {
     })
 
     it('should return 204 with empty user if the user was not founded', async () => {
-      const { controller, newUserMock, userMock, requestMock, responseMock } = makeSut()
+      const { controller, userMock, requestMock, responseMock } = makeSut()
       jest.spyOn(usersRepositoryMock, 'getById').mockResolvedValueOnce(undefined)
 
       const promise = controller.getById(requestMock, responseMock)
@@ -67,7 +67,7 @@ describe('ReadUsersController', () => {
     })
 
     it('should return 500 if some error occur', async () => {
-      const { controller, newUserMock, userMock, requestMock, responseMock } = makeSut()
+      const { controller, userMock, requestMock, responseMock } = makeSut()
       jest.spyOn(usersRepositoryMock, 'getById').mockRejectedValueOnce(new Error('some error'))
 
       const promise = controller.getById(requestMock, responseMock)
@@ -82,7 +82,7 @@ describe('ReadUsersController', () => {
 
   describe('list', () => {
     it('should return the list of users', async () => {
-      const { controller, newUserMock, userMock, requestMock, responseMock } = makeSut()
+      const { controller, userMock, requestMock, responseMock } = makeSut()
       jest.spyOn(usersRepositoryMock, 'list').mockResolvedValueOnce([userMock, userMock])
 
       const promise = controller.list(requestMock, responseMock)
@@ -94,7 +94,7 @@ describe('ReadUsersController', () => {
     })
 
     it('should return 500 if some error occur', async () => {
-      const { controller, newUserMock, userMock, requestMock, responseMock } = makeSut()
+      const { controller, requestMock, responseMock } = makeSut()
       jest.spyOn(usersRepositoryMock, 'list').mockRejectedValueOnce(new Error('some error'))
 
       const promise = controller.list(requestMock, responseMock)
