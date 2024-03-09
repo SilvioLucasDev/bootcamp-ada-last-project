@@ -6,6 +6,7 @@ export interface IUsersRepository {
   getByEmail(email: string): Promise<User | undefined>
   list(): Promise<User[]>
   update(id: string, user: NewUser): Promise<void>
+  delete(id: string): Promise<void>
 }
 
 export interface IBooksRepository {
