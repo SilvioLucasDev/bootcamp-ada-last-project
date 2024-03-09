@@ -60,7 +60,19 @@ describe('UpdateBooksRentalController', () => {
     expect(responseMock.statusCode).toEqual(404)
   })
 
-  it.todo('should return 409 statusCode and not update the book rental if there is a rental with the same book id')
+  it('should return 409 statusCode and not update the book rental if there is a rental with the same book id', async () => {
+    const { controller, booksRentalMock, requestMock, responseMock } = makeSut()
+    jest.spyOn(booksRentalRepositoryMock, 'getById').mockResolvedValueOnce({ ...booksRentalMock, book_id: 'any_uuid' })
+    jest.spyOn(booksRentalRepositoryMock, 'getByBookId').mockResolvedValueOnce(booksRentalMock)
+    jest.spyOn(booksRentalRepositoryMock, 'update').mockResolvedValueOnce()
+
+    const promise = controller.update(requestMock, responseMock)
+
+    await expect(promise).resolves.not.toThrow()
+    expect(booksRentalRepositoryMock.getById).toHaveBeenCalledWith(booksRentalMock.id)
+    expect(booksRentalRepositoryMock.getByBookId).toHaveBeenCalledWith(booksRentalMock.book_id)
+    expect(booksRentalRepositoryMock.update).toHaveBeenCalledTimes(0)
+  })
 
   it.todo('should return 500 if some error occur')
 
