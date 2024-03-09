@@ -74,7 +74,16 @@ describe('UpdateBooksRentalController', () => {
     expect(booksRentalRepositoryMock.update).toHaveBeenCalledTimes(0)
   })
 
-  it.todo('should return 500 if some error occur')
+  it('should return 500 if some error occur', async () => {
+    const { controller, booksRentalMock, requestMock, responseMock } = makeSut()
+    jest.spyOn(booksRentalRepositoryMock, 'getById').mockRejectedValueOnce(new Error('some error'))
+
+    const promise = controller.update(requestMock, responseMock)
+
+    await expect(promise).resolves.not.toThrow()
+    expect(booksRentalRepositoryMock.getById).toHaveBeenCalledWith(booksRentalMock.id)
+    expect(responseMock.statusCode).toEqual(500)
+  })
 
   it('should update and return book rental if the book rental exist', async () => {
     const { controller, booksRentalMock, requestMock, responseMock } = makeSut()
