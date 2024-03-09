@@ -77,6 +77,7 @@ describe('ReadBooksController', () => {
 
       await expect(promise).resolves.not.toThrow()
       expect(booksRepositoryMock.getById).toHaveBeenCalledWith(bookMock.id)
+      expect(responseMock.json).toHaveBeenCalledWith({ message: 'something went wrong, try again latter!' })
       expect(responseMock.statusCode).toEqual(500)
     })
 

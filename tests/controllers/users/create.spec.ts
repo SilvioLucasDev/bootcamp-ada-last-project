@@ -23,13 +23,13 @@ describe('CreateUsersController', () => {
 
     const responseMock = {
       statusCode: 0,
-      status: (status: number) => {
-        responseMock.statusCode = status
-        return {
-          json: jest.fn()
-        } as any
-      },
-    } as Response
+      status: jest.fn().mockImplementation((status: number) => {
+        responseMock.statusCode = status;
+        return responseMock;
+      }),
+      json: jest.fn(),
+      send: jest.fn(),
+    } as unknown as Response;
 
     return {
       controller, newUserMock, userMock, requestMock, responseMock
@@ -74,6 +74,7 @@ describe('CreateUsersController', () => {
 
     await expect(promise).resolves.not.toThrow()
     expect(usersRepositoryMock.getByEmail).toHaveBeenCalledWith(newUserMock.email)
+    expect(responseMock.json).toHaveBeenCalledWith({ message: 'something went wrong, try again latter!' })
     expect(responseMock.statusCode).toEqual(500)
   })
 })
