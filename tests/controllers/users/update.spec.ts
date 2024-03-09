@@ -73,7 +73,16 @@ describe('UpdateUsersController', () => {
     expect(responseMock.statusCode).toEqual(409)
   })
 
-  it.todo('should return 500 if some error occur')
+  it('should return 500 if some error occur', async () => {
+    const { controller, userMock, requestMock, responseMock } = makeSut()
+    jest.spyOn(usersRepositoryMock, 'getById').mockRejectedValueOnce(new Error('some error'))
+
+    const promise = controller.update(requestMock, responseMock)
+
+    await expect(promise).resolves.not.toThrow()
+    expect(usersRepositoryMock.getById).toHaveBeenCalledWith(userMock.id)
+    expect(responseMock.statusCode).toEqual(500)
+  })
 
   it.todo('should update and return user if the user was funded and if there is no other user with the same email')
 })
