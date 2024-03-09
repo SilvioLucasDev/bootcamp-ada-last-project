@@ -33,7 +33,6 @@ export class ReadUsersController {
       res.status(200).json(users)
       return
     } catch (err) {
-      console.log(err)
       this.logger.error({ message: 'error to read users', error: err })
       res.status(500).json({ message: 'something went wrong, try again latter!' })
       return

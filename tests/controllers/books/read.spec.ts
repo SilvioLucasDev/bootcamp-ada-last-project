@@ -95,6 +95,16 @@ describe('ReadBooksController', () => {
       expect(responseMock.statusCode).toEqual(200)
     })
 
-    it.todo('should return 500 if some error occur')
+    it('should return 500 if some error occur', async () => {
+      const { controller, newBookMock, bookMock, requestMock, responseMock } = makeSut()
+      jest.spyOn(booksRepositoryMock, 'list').mockRejectedValueOnce(new Error('some error'))
+
+      const promise = controller.list(requestMock, responseMock)
+
+      await expect(promise).resolves.not.toThrow()
+      expect(booksRepositoryMock.list).toHaveBeenCalledTimes(1)
+      expect(responseMock.json).toHaveBeenCalledWith({ message: 'something went wrong, try again latter!' })
+      expect(responseMock.statusCode).toEqual(500)
+    })
   })
 })
