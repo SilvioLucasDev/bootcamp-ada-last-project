@@ -5,11 +5,13 @@ import { UpdateBooksController } from "./controllers/books/update"
 import { DeleteBooksController } from "./controllers/books/delete"
 import { CreateUsersController } from "./controllers/users/create"
 import { ReadUsersController } from "./controllers/users/read"
+import { UpdateUsersController } from "./controllers/users/update"
+import { DeleteUsersController } from "./controllers/users/delete"
 import { CreateBooksRentalController } from "./controllers/books_rental/create"
 import { ReadBooksRentalController } from "./controllers/books_rental/read"
 import { UpdateBooksRentalController } from "./controllers/books_rental/update"
 import { DeleteBooksRentalController } from "./controllers/books_rental/delete"
-import { UpdateUsersController } from "./controllers/users/update"
+
 
 type Args = {
   createBooksController: CreateBooksController,
@@ -17,14 +19,15 @@ type Args = {
   updateBooksController: UpdateBooksController
   deleteBooksController: DeleteBooksController,
 
- createUsersController: CreateUsersController,
- readUsersController: ReadUsersController,
- updateUsersController: UpdateUsersController,
+  createUsersController: CreateUsersController,
+  readUsersController: ReadUsersController,
+  updateUsersController: UpdateUsersController,
+  deleteUsersController: DeleteUsersController,
 
- createBooksRentalController: CreateBooksRentalController,
- readBooksRentalController: ReadBooksRentalController,
- updateBooksRentalController: UpdateBooksRentalController,
- deleteBooksRentalController: DeleteBooksRentalController
+  createBooksRentalController: CreateBooksRentalController,
+  readBooksRentalController: ReadBooksRentalController,
+  updateBooksRentalController: UpdateBooksRentalController,
+  deleteBooksRentalController: DeleteBooksRentalController
 }
 
 export const Routes = (args: Args) => {
@@ -40,6 +43,7 @@ export const Routes = (args: Args) => {
   routes.get('/v1/users/:id', args.readUsersController.getById.bind(args.readUsersController))
   routes.get('/v1/users', args.readUsersController.list.bind(args.readUsersController))
   routes.put('/v1/users/:id', args.updateUsersController.update.bind(args.updateUsersController))
+  routes.delete('/v1/users/:id', args.deleteUsersController.delete.bind(args.deleteUsersController))
 
   routes.post('/v1/rental/books', args.createBooksRentalController.create.bind(args.createBooksRentalController))
   routes.get('/v1/rental/books', args.readBooksRentalController.list.bind(args.readBooksRentalController))

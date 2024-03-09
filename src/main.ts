@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors'
 import helmet from 'helmet';
 import morgan from 'morgan'
-import winston  from 'winston';
+import winston from 'winston';
 
 import { Routes } from './routes';
 import { BooksRepository } from './repositories/books';
@@ -20,8 +20,9 @@ import { ReadBooksRentalController } from './controllers/books_rental/read';
 import { UpdateBooksRentalController } from './controllers/books_rental/update';
 import { DeleteBooksRentalController } from './controllers/books_rental/delete';
 import { UpdateUsersController } from './controllers/users/update';
+import { DeleteUsersController } from './controllers/users/delete';
 
-;(async ()=> {
+; (async () => {
   const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env'
   dotenv.config({ path: envFile })
 
@@ -53,13 +54,14 @@ import { UpdateUsersController } from './controllers/users/update';
   const createUsersController = new CreateUsersController(logger, usersRepository)
   const readUsersController = new ReadUsersController(logger, usersRepository)
   const updateUsersController = new UpdateUsersController(logger, usersRepository)
+  const deleteUsersController = new DeleteUsersController(logger, usersRepository)
 
   const createBooksRentalController = new CreateBooksRentalController(logger, booksRentalRepository)
   const readBooksRentalController = new ReadBooksRentalController(logger, booksRentalRepository)
   const updateBooksRentalController = new UpdateBooksRentalController(logger, booksRentalRepository)
   const deleteBooksRentalController = new DeleteBooksRentalController(logger, booksRentalRepository)
 
-  app.use( 
+  app.use(
     Routes({
       createBooksController,
       readBooksController,
@@ -68,6 +70,7 @@ import { UpdateUsersController } from './controllers/users/update';
       createUsersController,
       readUsersController,
       updateUsersController,
+      deleteUsersController,
       createBooksRentalController,
       readBooksRentalController,
       updateBooksRentalController,
@@ -76,7 +79,7 @@ import { UpdateUsersController } from './controllers/users/update';
   );
 
   const PORT = process.env.PORT || 3000
-  
+
   app.listen(PORT, () => {
     logger.info({ message: 'Server started!' });
   });
