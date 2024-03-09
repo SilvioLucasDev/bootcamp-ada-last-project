@@ -8,13 +8,13 @@ import { v4 } from 'uuid'
 export class BooksRentalRepository implements IBooksRentalRepository {
   public async create(newBookRental: NewBooksRental): Promise<BooksRental> {
     const id = v4()
-    const bookRental = await BooksRentalModel.create({id, ...newBookRental});
+    const bookRental = await BooksRentalModel.create({ id, ...newBookRental });
     return bookRental.dataValues
   }
 
   public async getById(id: string): Promise<BooksRental> {
     const bookRental = await BooksRentalModel.findOne(
-      { 
+      {
         where: { id },
         include: [
           {
@@ -28,7 +28,7 @@ export class BooksRentalRepository implements IBooksRentalRepository {
         ]
       }
     )
-    if(!bookRental)
+    if (!bookRental)
       return undefined
 
     return {
@@ -44,7 +44,7 @@ export class BooksRentalRepository implements IBooksRentalRepository {
 
   public async getByBookId(book_id: string): Promise<BooksRental | undefined> {
     const bookRental = await BooksRentalModel.findOne(
-      { 
+      {
         where: { book_id },
         include: [
           {
@@ -58,7 +58,7 @@ export class BooksRentalRepository implements IBooksRentalRepository {
         ]
       },
     )
-    if(!bookRental)
+    if (!bookRental)
       return undefined
 
     return {
@@ -97,7 +97,11 @@ export class BooksRentalRepository implements IBooksRentalRepository {
     }))
   }
 
+  public async update(id: string, bookRental: NewBooksRental): Promise<void> {
+    await BooksRentalModel.update({ ...bookRental }, { where: { id } })
+  }
+
   public async delete(id: string): Promise<void> {
-    await BooksRentalModel.destroy({ where: { id }})
+    await BooksRentalModel.destroy({ where: { id } })
   }
 }
