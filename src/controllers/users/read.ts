@@ -6,7 +6,7 @@ export class ReadUsersController {
   constructor(
     private readonly logger: Logger,
     private readonly usersRepository: IUsersRepository
-  ) {}
+  ) { }
 
   public async getById(req: Request, res: Response): Promise<void> {
     const { id } = req.params
@@ -14,13 +14,13 @@ export class ReadUsersController {
     try {
       const user = await this.usersRepository.getById(id)
 
-      if(user)
+      if (user)
         res.status(200).json(user)
       else
         res.status(204).send()
 
       return
-    }catch(err){ 
+    } catch (err) {
       this.logger.error({ message: 'error to read user', error: err })
       res.status(500).json({ message: 'something went wrong, try again latter!' })
       return
@@ -28,6 +28,15 @@ export class ReadUsersController {
   }
 
   public async list(req: Request, res: Response): Promise<void> {
-    res.status(501).send({ message: 'not implemented yet!' })
+    try {
+      const users = await this.usersRepository.list()
+      res.status(200).json(users)
+      return
+    } catch (err) {
+      console.log(err)
+      this.logger.error({ message: 'error to read users', error: err })
+      res.status(500).json({ message: 'something went wrong, try again latter!' })
+      return
+    }
   }
 }
