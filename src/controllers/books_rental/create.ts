@@ -16,7 +16,7 @@ export class CreateBooksRentalController {
       const bookAlreadyRented = await this.booksRentalRepository.getByBookId(body.book_id)
       if(bookAlreadyRented){
         this.logger.warn({ message: 'book already rented', book_id: body.book_id })
-        res.status(409).json({ message: 'book already rented' })
+        res.status(409).json({ message: 'book already rented!' })
         return
       }
 

@@ -14,7 +14,7 @@ export class DeleteUsersController {
     try {
       const user = await this.usersRepository.getById(id)
       if (!user) {
-        res.status(404).json({ message: 'any user with the id provided was founded' })
+        res.status(404).json({ message: 'any user with the id provided was founded!' })
         return
       }
 

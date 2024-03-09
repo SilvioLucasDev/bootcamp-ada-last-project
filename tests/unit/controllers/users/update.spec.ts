@@ -52,6 +52,7 @@ describe('UpdateUsersController', () => {
 
     await expect(promise).resolves.not.toThrow()
     expect(usersRepositoryMock.getById).toHaveBeenCalledWith(userMock.id)
+    expect(responseMock.json).toHaveBeenCalledWith({ message: 'no user were found with the provided id!' })
     expect(usersRepositoryMock.update).toHaveBeenCalledTimes(0)
     expect(responseMock.statusCode).toEqual(404)
   })
@@ -68,6 +69,7 @@ describe('UpdateUsersController', () => {
     await expect(promise).resolves.not.toThrow()
     expect(usersRepositoryMock.getById).toHaveBeenCalledWith(userMock.id)
     expect(usersRepositoryMock.getByEmail).toHaveBeenCalledWith(userMock.email)
+    expect(responseMock.json).toHaveBeenCalledWith({ message: 'there is already a user with the same email provided!' })
     expect(usersRepositoryMock.update).toHaveBeenCalledTimes(0)
     expect(responseMock.statusCode).toEqual(409)
   })

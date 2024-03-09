@@ -16,7 +16,7 @@ export class CreateBooksController {
       const alreadyCreated = await this.booksRepository.getByTitle(body.title)
       if(alreadyCreated){
         this.logger.warn({ message: 'duplicated book', email: body.title })
-        res.status(409).json({ message: 'book with the same title already existe' })
+        res.status(409).json({ message: 'book with the same title already exists!' })
         return
       }
 

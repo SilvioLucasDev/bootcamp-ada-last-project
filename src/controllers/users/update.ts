@@ -16,14 +16,14 @@ export class UpdateUsersController {
     try {
       const user = await this.usersRepository.getById(id)
       if (!user) {
-        res.status(404).json({ message: 'no user were found with the provided id' })
+        res.status(404).json({ message: 'no user were found with the provided id!' })
         return
       }
 
       if (body.email && body.email !== user.email) {
         const withTheSameEmail = await this.usersRepository.getByEmail(body.email)
         if (withTheSameEmail) {
-          res.status(409).json({ message: 'there is already a user with the same email provided' })
+          res.status(409).json({ message: 'there is already a user with the same email provided!' })
           return
         }
       }

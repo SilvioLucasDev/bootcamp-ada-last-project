@@ -55,6 +55,7 @@ describe('UpdateBooksController', () => {
 
     await expect(promise).resolves.not.toThrow()
     expect(booksRepositoryMock.getById).toHaveBeenCalledWith(bookMock.id)
+    expect(responseMock.json).toHaveBeenCalledWith({ message: 'no book were found with the given id!' })
     expect(booksRepositoryMock.update).toHaveBeenCalledTimes(0)
     expect(responseMock.statusCode).toEqual(404)
   })
@@ -70,6 +71,7 @@ describe('UpdateBooksController', () => {
     await expect(promise).resolves.not.toThrow()
     expect(booksRepositoryMock.getById).toHaveBeenCalledWith(bookMock.id)
     expect(booksRepositoryMock.getByTitle).toHaveBeenCalledWith(bookMock.title)
+    expect(responseMock.json).toHaveBeenCalledWith({ message: 'there is already a book with the same title provided!' })
     expect(booksRepositoryMock.update).toHaveBeenCalledTimes(0)
     expect(responseMock.statusCode).toEqual(409)
   })

@@ -16,14 +16,14 @@ export class UpdateBooksController {
     try {
       const book = await this.booksRepository.getById(id)
       if (!book) {
-        res.status(404).json({ message: 'no book were found with the given id' })
+        res.status(404).json({ message: 'no book were found with the given id!' })
         return
       }
 
       if (body.title && body.title !== book.title) {
         const withTheSameTitle = await this.booksRepository.getByTitle(body.title)
         if (withTheSameTitle) {
-          res.status(409).json({ message: 'there is already a book with the same title provided' })
+          res.status(409).json({ message: 'there is already a book with the same title provided!' })
           return
         }
       }
