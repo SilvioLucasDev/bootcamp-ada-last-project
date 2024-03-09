@@ -35,4 +35,8 @@ export class UsersRepository implements IUsersRepository {
       email: user.dataValues.email
     }))
   }
+
+  public async update(id: string, user: NewUser): Promise<void> {
+    await UsersModel.update({ ...user }, { where: { id } })
+  }
 }
