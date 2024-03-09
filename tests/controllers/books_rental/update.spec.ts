@@ -47,7 +47,20 @@ describe('UpdateBooksRentalController', () => {
     jest.clearAllMocks()
   })
 
-  it.todo('should update and return book rental if the book rental exist')
+  it('should update and return book rental if the book rental exist', async () => {
+    const { controller, booksRentalMock, requestMock, responseMock } = makeSut()
+    jest.spyOn(booksRentalRepositoryMock, 'getById').mockResolvedValueOnce(booksRentalMock)
+    jest.spyOn(booksRentalRepositoryMock, 'getByBookId').mockResolvedValueOnce(undefined)
+    jest.spyOn(booksRentalRepositoryMock, 'update').mockResolvedValueOnce()
+
+    const promise = controller.update(requestMock, responseMock)
+
+    await expect(promise).resolves.not.toThrow()
+    expect(booksRentalRepositoryMock.getById).toHaveBeenCalledWith(booksRentalMock.id)
+    expect(booksRentalRepositoryMock.getByBookId).toHaveBeenCalledTimes(0)
+    expect(booksRentalRepositoryMock.update).toHaveBeenCalledTimes(1)
+    expect(responseMock.statusCode).toEqual(200)
+  })
 
   it.todo('should return 404 statusCode and not update the book rental if there is no rental with the id provided')
 
