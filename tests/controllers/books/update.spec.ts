@@ -47,18 +47,6 @@ describe('UpdateBooksController', () => {
     jest.clearAllMocks()
   })
 
-  it('should update and return book if the book exist', async () => {
-    const { controller, bookMock, requestMock, responseMock } = makeSut()
-    jest.spyOn(booksRepositoryMock, 'getById').mockResolvedValueOnce(bookMock)
-    jest.spyOn(booksRepositoryMock, 'update').mockResolvedValueOnce()
-
-    const promise = controller.update(requestMock, responseMock)
-
-    await expect(promise).resolves.not.toThrow()
-    expect(booksRepositoryMock.getById).toHaveBeenCalledWith(bookMock.id)
-    expect(responseMock.statusCode).toEqual(200)
-  })
-
   it('should return 404 statusCode and not update the book if there is no book with the id provided', async () => {
     const { controller, bookMock, requestMock, responseMock } = makeSut()
     jest.spyOn(booksRepositoryMock, 'getById').mockResolvedValueOnce(undefined)
@@ -72,7 +60,20 @@ describe('UpdateBooksController', () => {
     expect(responseMock.statusCode).toEqual(404)
   })
 
-  it.todo('should return 409 statusCode and not update the book if there is a book with the same title')
+  it('should return 409 statusCode and not update the book if there is a book with the same title', async () => {
+    const { controller, bookMock, requestMock, responseMock } = makeSut()
+    jest.spyOn(booksRepositoryMock, 'getById').mockResolvedValueOnce(bookMock)
+    jest.spyOn(booksRepositoryMock, 'getByTitle').mockResolvedValueOnce(bookMock)
+    jest.spyOn(booksRepositoryMock, 'update').mockResolvedValueOnce()
+
+    const promise = controller.update(requestMock, responseMock)
+
+    await expect(promise).resolves.not.toThrow()
+    expect(booksRepositoryMock.getById).toHaveBeenCalledWith(bookMock.id)
+    expect(booksRepositoryMock.getByTitle).toHaveBeenCalledWith(bookMock.title)
+    expect(booksRepositoryMock.update).toHaveBeenCalledTimes(0)
+    expect(responseMock.statusCode).toEqual(409)
+  })
 
   it('should return 500 if some error occur', async () => {
     const { controller, newBookMock, bookMock, requestMock, responseMock } = makeSut()
@@ -83,5 +84,20 @@ describe('UpdateBooksController', () => {
     await expect(promise).resolves.not.toThrow()
     expect(booksRepositoryMock.getById).toHaveBeenCalledWith(bookMock.id)
     expect(responseMock.statusCode).toEqual(500)
+  })
+
+  it('should update and return book if the book exist', async () => {
+    const { controller, bookMock, requestMock, responseMock } = makeSut()
+    jest.spyOn(booksRepositoryMock, 'getById').mockResolvedValueOnce({ ...bookMock, title: 'any title' })
+    jest.spyOn(booksRepositoryMock, 'getByTitle').mockResolvedValueOnce(undefined)
+    jest.spyOn(booksRepositoryMock, 'update').mockResolvedValueOnce()
+
+    const promise = controller.update(requestMock, responseMock)
+
+    await expect(promise).resolves.not.toThrow()
+    expect(booksRepositoryMock.getById).toHaveBeenCalledWith(bookMock.id)
+    expect(booksRepositoryMock.getByTitle).toHaveBeenCalledTimes(0)
+    expect(booksRepositoryMock.update).toHaveBeenCalledTimes(1)
+    expect(responseMock.statusCode).toEqual(200)
   })
 })
