@@ -60,7 +60,7 @@ describe('UpdateUsersController', () => {
 
   it('should return 409 statusCode and not update the user if there is an user with the same email', async () => {
     const { controller, userMock, requestMock, responseMock } = makeSut()
-    jest.spyOn(usersRepositoryMock, 'getById').mockResolvedValueOnce({ ...userMock, email: 'any_email@email.com' })
+    jest.spyOn(usersRepositoryMock, 'getById').mockResolvedValueOnce(userMock)
     jest.spyOn(usersRepositoryMock, 'getByEmail').mockResolvedValueOnce(userMock)
     jest.spyOn(usersRepositoryMock, 'update').mockResolvedValueOnce()
 
@@ -96,7 +96,7 @@ describe('UpdateUsersController', () => {
 
     await expect(promise).resolves.not.toThrow()
     expect(usersRepositoryMock.getById).toHaveBeenCalledWith(userMock.id)
-    expect(usersRepositoryMock.getByEmail).toHaveBeenCalledTimes(0)
+    expect(usersRepositoryMock.getByEmail).toHaveBeenCalledTimes(1)
     expect(usersRepositoryMock.update).toHaveBeenCalledTimes(1)
     expect(responseMock.statusCode).toEqual(200)
   })

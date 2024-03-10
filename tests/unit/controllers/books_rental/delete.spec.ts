@@ -69,7 +69,7 @@ describe('DeleteBooksRentalController', () => {
     expect(booksRentalRepositoryMock.getById).toHaveBeenCalledWith(booksRentalMock.id)
     expect(booksRentalRepositoryMock.delete).not.toHaveBeenCalled()
     expect(responseMock.json).toHaveBeenCalledWith({ message: 'any book rental with the id provided was founded!' })
-    expect(responseMock.statusCode).toEqual(409)
+    expect(responseMock.statusCode).toEqual(404)
   })
 
   it('should return 500 if some error occur', async () => {
