@@ -44,3 +44,8 @@ export const booksMock: Book[] = [
     authors: fakerEN.person.firstName(),
   },
 ]
+
+export const fieldsToUpdateMock: Partial<Book> = {
+  title: fakerEN.word.words(),
+  authors: fakerEN.person.firstName(),
+}
