@@ -14,7 +14,7 @@ export class DeleteBooksRentalController {
     try {
       const booksRental = await this.booksRentalRepository.getById(id)
       if(!booksRental){
-        res.status(409).json({ message: 'any book rental with the id provided was founded!' })
+        res.status(404).json({ message: 'any book rental with the id provided was founded!' })
         return
       }
 
