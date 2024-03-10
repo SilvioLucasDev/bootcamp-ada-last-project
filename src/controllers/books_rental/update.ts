@@ -20,7 +20,7 @@ export class UpdateBooksRentalController {
         return
       }
 
-      if (body.book_id && body.book_id !== bookRental.book_id) {
+      if (body.book_id) {
         const BookAlreadyRented = await this.booksRentalRepository.getByBookId(body.book_id)
         if (BookAlreadyRented) {
           res.status(409).json({ message: 'there is already a rental with the same book provided!' })
