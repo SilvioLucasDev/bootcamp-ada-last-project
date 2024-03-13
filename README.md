@@ -69,7 +69,13 @@ yarn start
 - Para executar os tests unitários
 
 ```bash
-yarn test
+yarn test:unit
+```
+
+- Para executar os tests de integração
+
+```bash
+yarn test:int
 ```
 
 - Para executar os tests unitários em watch mode
