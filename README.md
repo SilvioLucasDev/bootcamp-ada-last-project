@@ -543,3 +543,10 @@ curl --location --request DELETE 'localhost:3000/v1/rental/books/af322af1-084a-4
 A resposta geralmente será um código de status HTTP indicando sucesso (como 200 OK ou 204 No Content) sem corpo de resposta, confirmando que o registro de aluguel de livro foi excluído com sucesso.
 
 </details>
+
+## Autores
+
+- [Mariano Júnior](https://www.github.com/Mariano-JR/)
+- [Silvio Lucas](https://github.com/SilvioLucasDev)
+- [Enei Pereira](https://github.com/eneipereira)
+- [Gabriel Gurgel](https://github.com/Gurgell)
