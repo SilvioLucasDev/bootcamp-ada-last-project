@@ -6,8 +6,10 @@
   "scripts": {
     "prestart": "yarn sequelize db:migrate",
     "start": "nodemon src/main.ts",
-    "test:unit": "jest --verbose ./tests/unit/**/**/*.spec.ts",
-    "test:int": "jest --verbose --runInBand --coverage ./tests/integration/**/*.spec.ts"
+    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test:coverage": "npm test -- --coverage",
+    "test:unit": "npm test -- --testPathPattern=tests/unit/.*\\.spec\\.ts$",
+    "test:int": "npm test -- --testPathPattern=tests/integration/.*\\.spec\\.ts$"
   },
   "dependencies": {
     "@types/express": "^4.17.21",
