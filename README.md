@@ -10,17 +10,17 @@
 
 Será disponibilizado para os alunos um projeto em Typescript, esse projeto é uma API HTTP para auxiliar na gestão da biblioteca municipal da cidade, contendo alguns recursos para ajudar as bibliotecárias na gestão dos livros e no empréstimo dos livros.
 
-O projeto foi construído utilizando TDD possuindo uma suíte de testes unitários, porém recentemente uma pessoa fez algumas alterações no projeto e os testes começaram a falhar. 
+O projeto foi construído utilizando TDD possuindo uma suíte de testes unitários, porém recentemente uma pessoa fez algumas alterações no projeto e os testes começaram a falhar.
 
 No README.md do projeto voces encontraram as intrujões para poderem conseguir configurar o projeto para executa-lo.
 
 **O seu objetivo será:**
 
-- Fazer que os testes voltem a ser executados; 
-- Resolver todos os testes que estão falhando; 
+- Fazer que os testes voltem a ser executados;
+- Resolver todos os testes que estão falhando;
 - Implementar todos os testes que não foram implementados e estão indicados como Todo.
 - Implementar as seguintes novas funcionalidades utilizando TDD:
-  
+
   - Consulta para obter todos os usuários cadastrados (ReadUsersController.list) - seguindo os requisitos [consultar lista de usuários](#get-v1users)
   - Atualizar os dados de um usuário (UpdateUsersController.update) - seguindo os requisitos [atualizar usuário](#put-v1usersid)
   - Atualização de um aluguel de livros (UpdateBooksRentalController.update) - seguindo os requisitos [atualizar aluguel de livro](#put-v1rentalbooksid);
@@ -43,24 +43,28 @@ No README.md do projeto voces encontraram as intrujões para poderem conseguir c
 
 ## Get started
 
+#### Antes de iniciar, certifique-se de ter renomeado o arquivo `.env.example` para `.env`
+
 - Voce precisa previamente ter o NodeJs instalado na versão LTS
   - [Versões NodeJs](https://nodejs.org/en/)
 - Voce precisa previamente ter configurado o WSL 2
   - [Tutorial da Microsoft WSL 2](https://learn.microsoft.com/pt-br/windows/wsl/install)
   - [Video tutorial WSL 2](https://www.youtube.com/watch?v=o1_E4PBl30s)
 - Voce precisa ter o yarn instalado
+
   - Uma vez tendo o NodeJs devidamente instalado basta executar
 
   ```bash
     npm install -g yarn
   ```
+
 - Voce precisa obter as dependências do projeto executando
 
 ```bash
 yarn
 ```
 
-- Para executar a API HTTP 
+- Para executar a API HTTP
 
 ```bash
 yarn start
@@ -78,10 +82,16 @@ yarn test:unit
 yarn test:int
 ```
 
-- Para executar os tests unitários em watch mode
+- Para executar os tests em watch mode
 
 ```bash
-yarn start --watch
+yarn test:watch
+```
+
+- Para executar os tests com coverage
+
+```bash
+yarn test:coverage
 ```
 
 ## HTTP API Endpoints
@@ -376,7 +386,6 @@ curl --location --request PUT 'localhost:3000/v1/users/0c8c9fe0-f35f-4b0d-8570-0
 A resposta será um objeto JSON contendo os detalhes atualizados do usuário.
 
 </details>
-
 
 <details>
 
