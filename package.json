@@ -8,6 +8,7 @@
     "start": "nodemon src/main.ts",
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:coverage": "npm test -- --coverage",
+    "test:watch": "npm test -- --watch",
     "test:unit": "npm test -- --testPathPattern=tests/unit/.*\\.spec\\.ts$",
     "test:int": "npm test -- --testPathPattern=tests/integration/.*\\.spec\\.ts$"
   },
